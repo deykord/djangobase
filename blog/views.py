@@ -4,7 +4,11 @@ from django.shortcuts import render
 
 
 def blog_view(request):
-    return render(request,'blog/blog-home.html')
+    from .models import Post
+    
+    posts = Post.objects.filter(status=1)
+    context = {'posts': posts}
+    return render(request, 'blog/blog-home.html', context)
 
 
 def blog_single(request):
